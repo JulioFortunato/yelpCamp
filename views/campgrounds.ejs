@@ -1,0 +1,10 @@
+<h2> campgrounds </h2>
+
+<ul>
+  <% campgrounds.map((campground) => { %>
+    <li>
+      <h3> <%= campground.name %> </h3>
+      <img src='<%= campground.image %>' alt='campground image' />
+    </li>
+  <% }) %>
+</ul>
