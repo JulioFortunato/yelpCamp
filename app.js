@@ -13,14 +13,16 @@ app.set('view engine', 'ejs')
 //schema
 const campgroundSchema = new mongoose.Schema({
   name: String,
-  image: String
+  image: String,
+  description: String
 })
 
 const Campground = mongoose.model('Campground', campgroundSchema)
 
 // Campground.create({
 //   name: 'Salmon',
-//   image: 'http://www.nationalparks.nsw.gov.au/~/media/DF58734103EF43669F1005AF8B668209.ashx'
+//   image: 'http://www.nationalparks.nsw.gov.au/~/media/DF58734103EF43669F1005AF8B668209.ashx',
+//   description: 'The biggest campground with everything you need, like bugs and a lot of birds'
 // }, (error, campground) => {
 //      if (error) {
 //         return console.log(error)
@@ -31,7 +33,8 @@ const Campground = mongoose.model('Campground', campgroundSchema)
 //
 // Campground.create({
 //   name: 'Granite',
-//   image: 'http://www.fondulacpark.com/wp-content/uploads/2015/01/campground-pic-1.jpg'
+//   image: 'http://www.fondulacpark.com/wp-content/uploads/2015/01/campground-pic-1.jpg',
+//   description: 'Here you can find the truly peace, just an amazing place to take a nap'
 // }, (error, campground) => {
 //      if (error) {
 //         return console.log(error)
@@ -50,14 +53,14 @@ app.get('/campgrounds', (req, res) => {
       return console.log(error)
     }
 
-    res.render('campgrounds', { campgrounds })
+    res.render('index', { campgrounds })
   })
 })
 
 app.post('/campgrounds', (req, res) => {
-  const { name, image } = req.body
+  const { name, image, description } = req.body
 
-  Campground.create({ name, image }, (error, campground) => {
+  Campground.create({ name, image, description }, (error, campground) => {
     if (error) {
       return console.log(error)
     }
@@ -68,6 +71,16 @@ app.post('/campgrounds', (req, res) => {
 
 app.get('/campgrounds/new', (req, res) => {
   res.render('new')
+})
+
+app.get('/campgrounds/:id', (req, res) => {
+  Campground.findById(req.params.id, (error, campground) => {
+      if (error) {
+        return console.log(error)
+      }
+
+      res.render('show', { campground })
+  })
 })
 
 app.listen(8000, () => {
