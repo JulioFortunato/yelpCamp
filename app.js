@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const app = express()
+const Campground = require('./modules/campground')
 
 mongoose.connect('mongodb://localhost/yelp_camp', { useMongoClient: true })
 
@@ -10,14 +11,6 @@ app.use(express.static('public'))
 
 app.set('view engine', 'ejs')
 
-//schema
-const campgroundSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-})
-
-const Campground = mongoose.model('Campground', campgroundSchema)
 
 // Campground.create({
 //   name: 'Salmon',
