@@ -1,8 +1,28 @@
 {
+  "name": "yelpcamp",
+  "description": "crud example with node js",
+  "version": "1.0.0",
+  "main": "index.js",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
-    "mongoose": "^4.11.1"
-  }
+    "mongoose": "^4.11.1",
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipesoares6/yelpCamp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipesoares6/yelpCamp/issues"
+  },
+  "homepage": "https://github.com/felipesoares6/yelpCamp#readme"
 }
