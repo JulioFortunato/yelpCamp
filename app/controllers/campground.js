@@ -1,5 +1,6 @@
 const ListCampgroundsService = require('../services/campground/index')
 const CreateCampgroundsService = require('../services/campground/create')
+const ReadCampgroundService = require('../services/campground/read')
 
 const CampgroundController = {
   index (req, res) {
@@ -27,7 +28,7 @@ const CampgroundController = {
   read (req, res) {
     const { id } = req.params
 
-    readCampgroundService.perform(id)
+    ReadCampgroundService.perform(id)
       .then((campground) => {
         res.status(200).json({ data: campground })
       })
