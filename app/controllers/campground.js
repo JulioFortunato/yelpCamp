@@ -1,6 +1,7 @@
 const ListCampgroundsService = require('../services/campground/index')
 const CreateCampgroundsService = require('../services/campground/create')
 const ReadCampgroundService = require('../services/campground/read')
+const DeleteCampgroundService = require('../services/campground/delete')
 
 const CampgroundController = {
   index (req, res) {
@@ -31,6 +32,18 @@ const CampgroundController = {
     ReadCampgroundService.perform(id)
       .then((campground) => {
         res.status(200).json({ data: campground })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+
+  delete (req, res) {
+    const { id } = req.params
+
+    DeleteCampgroundService.perform(id)
+      .then((campground) => {
+        res.status(204).json({})
       })
       .catch((error) => {
         console.log(error)
