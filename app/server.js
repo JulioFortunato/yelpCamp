@@ -1,7 +1,9 @@
-require('dotenv').config()
+const loadEnvironment = require('./loadEnvironment')
 const express = require('express')
 const bodyParser = require('body-parser')
 const router = require('./routes/router')
+
+loadEnvironment()
 
 const app = express()
 
