@@ -1,4 +1,4 @@
-const CampgroundModel = require('../../app/models/campground')
+const CampgroundModel = require('app/models/campground')
 
 const Campground = new CampgroundModel({
   name: 'Topground',

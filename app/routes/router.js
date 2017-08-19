@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const campgroundRouter = require('./campground')
+const campgroundRouter = require('app/routes/campground')
 
 router.use('/', campgroundRouter)
 

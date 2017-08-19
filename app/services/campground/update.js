@@ -1,4 +1,5 @@
-const campgroundsModel = require('../../models/campground')
+const campgroundsModel = require('app/models/campground')
+
 const UpdateCampgroundsService = {
   perform (id, campground) {
     return new Promise((resolve, reject) => {

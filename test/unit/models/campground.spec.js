@@ -1,5 +1,5 @@
-const campgroundMock = require('../../mocks/campground')
-const commentMock = require('../../mocks/comment')
+const campgroundMock = require('test/mocks/campground')
+const commentMock = require('test/mocks/comment')
 
 describe('Model Campground', () => {
   describe('name attribute', () => {

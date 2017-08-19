@@ -1,6 +1,6 @@
-const campgroundsModel = require('../../../../app/models/campground')
-const CreateCampgroundsService = require('../../../../app/services/campground/create')
-const campgroundMock = require('../../../mocks/campground')
+const campgroundsModel = require('app/models/campground')
+const CreateCampgroundsService = require('app/services/campground/create')
+const campgroundMock = require('test/mocks/campground')
 
 describe('Service Create Campground', () => {
   context('when the campground is added with success', () => {

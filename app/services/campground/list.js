@@ -1,4 +1,4 @@
-const campgroundsModel = require('../../models/campground')
+const campgroundsModel = require('app/models/campground')
 
 const ListCampgroundsService = {
   perform () {

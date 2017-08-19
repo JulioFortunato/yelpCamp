@@ -1,5 +1,5 @@
 const campgrounds = require('express').Router()
-const controller = require('../controllers/campground')
+const controller = require('app/controllers/campground')
 
 campgrounds.get('/campgrounds', controller.list)
 campgrounds.post('/campgrounds', controller.create)

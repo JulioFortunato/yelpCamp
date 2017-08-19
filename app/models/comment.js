@@ -1,4 +1,5 @@
-const { mongoose, mongoSchema } = require('../db/connect')
+const { mongoose, mongoSchema } = require('app/db/connect')
+
 const authorRequired = [ true, 'The comment must have an author']
 const textRequired = [ true, 'The comment must have a text']
 

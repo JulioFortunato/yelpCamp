@@ -1,5 +1,5 @@
-const Campground = require('../models/campground')
-const Comment = require('../models/comment')
+const Campground = require('app/models/campground')
+const Comment = require('app/models/comment')
 
 const campgroundData = [
   {

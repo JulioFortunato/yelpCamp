@@ -1,8 +1,8 @@
 const express = require('express')
-const loadEnvironment = require('./load-environment')
-const errorHandler = require('./error-handler')
+const loadEnvironment = require('app/load-environment')
+const errorHandler = require('app/error-handler')
+const router = require('app/routes/router')
 const bodyParser = require('body-parser')
-const router = require('./routes/router')
 
 loadEnvironment()
 

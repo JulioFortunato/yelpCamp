@@ -1,4 +1,4 @@
-const CommentModel = require('../../app/models/comment')
+const CommentModel = require('app/models/comment')
 
 const Comment = new CommentModel({
   author: 'Top guy',

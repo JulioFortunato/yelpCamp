@@ -1,8 +1,8 @@
-const ListCampgroundsService = require('../services/campground/list')
-const CreateCampgroundsService = require('../services/campground/create')
-const ReadCampgroundService = require('../services/campground/read')
-const UpdateCampgroundService = require('../services/campground/update')
-const DeleteCampgroundService = require('../services/campground/delete')
+const ListCampgroundsService = require('app/services/campground/list')
+const CreateCampgroundsService = require('app/services/campground/create')
+const ReadCampgroundService = require('app/services/campground/read')
+const UpdateCampgroundService = require('app/services/campground/update')
+const DeleteCampgroundService = require('app/services/campground/delete')
 
 const CampgroundController = {
   list (req, res) {
@@ -15,7 +15,7 @@ const CampgroundController = {
       })
   },
 
-  create (req, res) {
+  create (req, res, next) {
     const campground = req.body
 
     CreateCampgroundsService.perform(campground)
@@ -23,7 +23,7 @@ const CampgroundController = {
         res.status(201).json({ message: 'Campground added to database', data: campgroundAdded })
       })
       .catch((error) => {
-        console.log(error)
+        next(error)
       })
   },
 

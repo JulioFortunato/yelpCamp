@@ -1,5 +1,4 @@
-const { mongoose, mongoSchema } = require('../db/connect')
-
+const { mongoose, mongoSchema } = require('app/db/connect')
 
 const nameRequired = [true, 'The campground must have a name']
 const imageRequired = [true, 'The campground must have an image']

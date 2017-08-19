@@ -1,4 +1,4 @@
-const commentMock = require('../../mocks/comment')
+const commentMock = require('test/mocks/comment')
 
 describe('Model Comment', () => {
   describe('author attribute', () => {
