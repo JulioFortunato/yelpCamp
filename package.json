@@ -16,9 +16,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon",
+    "start": "NODE_PATH=. nodemon",
     "seed": "node app/db/seed.js",
-    "test": "mocha --require test/index.js test/unit/**/*.spec.js"
+    "test": "NODE_PATH=. mocha --require test/index.js test/**/*.spec.js"
   },
   "repository": {
     "type": "git",
