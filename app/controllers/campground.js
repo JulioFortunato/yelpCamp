@@ -1,11 +1,11 @@
-const ListCampgroundsService = require('../services/campground/index')
+const ListCampgroundsService = require('../services/campground/list')
 const CreateCampgroundsService = require('../services/campground/create')
 const ReadCampgroundService = require('../services/campground/read')
 const UpdateCampgroundService = require('../services/campground/update')
 const DeleteCampgroundService = require('../services/campground/delete')
 
 const CampgroundController = {
-  index (req, res) {
+  list (req, res) {
     ListCampgroundsService.perform()
       .then((campgrounds) => {
         res.status(200).json({ data: campgrounds })
