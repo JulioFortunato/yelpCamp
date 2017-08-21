@@ -5,10 +5,11 @@ const campgroundMock = require('test/mocks/campground')
 describe('Service Create Campground', () => {
   context('when the campground is added with success', () => {
     let result
+    let campground = campgroundMock
 
     before(() => {
-      sinon.stub(campgroundsModel, 'create').resolves(campgroundMock)
-      CreateCampgroundsService.perform(campgroundMock)
+      sinon.stub(campgroundsModel, 'create').resolves(campground)
+      CreateCampgroundsService.perform(campground)
         .then((campgroundAdded) => result = campgroundAdded)
     })
 
@@ -18,30 +19,61 @@ describe('Service Create Campground', () => {
       done()
     })
 
-    it('return the campground added', () => {
+    it('will return the campground added', () => {
       expect(result).to.be.equal(campgroundMock)
     })
   })
 
   context('when the campground is added with error', () => {
     let result
-    const error = { message: 'Campground validation failed: name: The campground must have a name' }
-    const campground = Object.assign(campgroundMock, { name: '' })
+    let campground = campgroundMock
 
-    before(() => {
-      sinon.stub(campgroundsModel, 'create').rejects(error)
+    context('the error is a Validation Error',  () => {
+      const error = {
+        type: 'ValidationError',
+        message: 'Campground validation failed: name: The campground must have a name'
+      }
 
-      CreateCampgroundsService.perform(campground)
+      before(() => {
+        sinon.stub(campgroundsModel, 'create').rejects(error)
+
+        CreateCampgroundsService.perform(campground)
         .catch((error) => result = error)
+      })
+
+      after((done) => {
+        campgroundsModel.create.restore()
+        done()
+      })
+
+      Object.assign(campground, { name: '' })
+
+      it('will return the Validation Error', () => {
+        expect(result).to.be.equal(error)
+      })
     })
 
-    after((done) => {
-      campgroundsModel.create.restore()
-      done()
-    })
+    context('the error is a Mongo Error',  () => {
+      const error = {
+        type: 'MongoError',
+        message: 'failed to reconnect after 30 attempts with interval 1000 ms'
+      }
 
-    it('return the error', () => {
-      expect(result).to.be.equal(error)
+      before(() => {
+        sinon.stub(campgroundsModel, 'create').rejects(error)
+
+        CreateCampgroundsService.perform(campground)
+        .catch((error) => result = error)
+      })
+
+      after((done) => {
+        campgroundsModel.create.restore()
+        done()
+      })
+
+      it('will return the Mongo Error', () => {
+        expect(result).to.be.equal(error)
+      })
     })
   })
 })
