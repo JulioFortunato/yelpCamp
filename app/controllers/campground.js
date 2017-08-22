@@ -11,7 +11,7 @@ const CampgroundController = {
         res.status(200).json({ data: campgrounds })
       })
       .catch((error) => {
-        console.log(error)
+        next(error)
       })
   },
 
