@@ -5,12 +5,16 @@ const UpdateCampgroundService = require('app/services/campground/update')
 const DeleteCampgroundService = require('app/services/campground/delete')
 
 const CampgroundController = {
-  list (req, res) {
+  list (req, res, next) {
     ListCampgroundsService.perform()
       .then((campgrounds) => {
         res.status(200).json({ data: campgrounds })
       })
       .catch((error) => {
+        if (error.name === 'MongoError') {
+          error.status = 500
+        }
+
         next(error)
       })
   },
@@ -23,6 +27,14 @@ const CampgroundController = {
         res.status(201).json({ message: 'Campground added to database', data: campgroundAdded })
       })
       .catch((error) => {
+        if (error instanceof ValidationError) {
+          error.status = 422
+      }
+
+        if (error.name === 'MongoError') {
+          error.status = 500
+        }
+
         next(error)
       })
   },
