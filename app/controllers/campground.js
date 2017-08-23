@@ -1,3 +1,5 @@
+const { ValidationError } = require('app/constants').mongooseErrors
+
 const ListCampgroundsService = require('app/services/campground/list')
 const CreateCampgroundsService = require('app/services/campground/create')
 const ReadCampgroundService = require('app/services/campground/read')
@@ -29,7 +31,7 @@ const CampgroundController = {
       .catch((error) => {
         if (error instanceof ValidationError) {
           error.status = 422
-      }
+        }
 
         if (error.name === 'MongoError') {
           error.status = 500
@@ -51,16 +53,31 @@ const CampgroundController = {
       })
   },
 
-  update (req, res) {
+  update (req, res, next) {
     const { id } = req.params
     const campground = req.body
 
     UpdateCampgroundService.perform(id, campground)
       .then((campgroundUpdated) => {
+        if (!campgroundUpdated) {
+          const error = { status: 404, message: 'This campground do not exist' }
+
+          return next(error)
+        }
+
         res.status(200).json({ data: campgroundUpdated })
       })
       .catch((error) => {
-        console.log(error)
+        if (error.name === 'CastError') {
+          error.status = 404
+          error.message = 'This campground do not exist'
+        }
+
+        if (error.name === 'MongoError') {
+          error.status = 500
+        }
+
+        next(error)
       })
   },
 
